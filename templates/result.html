@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GODS USAGE PANEL</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Divine Color Scheme */
+        :root {
+            --divine-gold: #FFD700;
+            --celestial-blue: #4B79CF;
+            --holy-purple: #9D50BB;
+            --sacred-red: #E53935;
+            --angelic-white: rgba(255, 255, 255, 0.92);
+            --dark-altar: #0F0C29;
+            --divine-glow: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+        }
+        
+        /* Divine Animation */
+        @keyframes divineGlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+        
+        @keyframes celestialFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes holyPulse {
+            0% { box-shadow: 0 0 5px var(--divine-gold); }
+            50% { box-shadow: 0 0 20px var(--divine-gold); }
+            100% { box-shadow: 0 0 5px var(--divine-gold); }
+        }
+        
+        /* Divine Base Styles */
+        body {
+            font-family: 'Cinzel', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000428, #0F0C29);
+            min-height: 100vh;
+            margin: 0;
+            color: var(--angelic-white);
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        /* Divine Light Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--divine-glow);
+            pointer-events: none;
+            animation: divineGlow 8s infinite alternate;
+            z-index: -1;
+        }
+        
+        /* Divine Header */
+        .divine-header {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(15,12,41,0.9), transparent);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+        }
+        
+        .divine-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, var(--divine-gold), var(--holy-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(157, 80, 187, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .divine-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--divine-gold), var(--holy-purple));
+            border-radius: 3px;
+        }
+        
+        /* Divine Card */
+        .divine-card {
+            background: rgba(15, 12, 41, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+            animation: celestialFloat 8s infinite ease-in-out;
+        }
+        
+        .divine-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .card-header i {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: var(--divine-gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Divine Resource Items */
+        .divine-resource {
+            margin-bottom: 20px;
+        }
+        
+        .resource-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .resource-title i {
+            margin-right: 10px;
+            color: var(--celestial-blue);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .resource-value {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        /* Divine Progress Bars */
+        .divine-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1.5s ease-in-out, background 0.5s ease;
+            position: relative;
+        }
+        
+        /* Divine Toggle Switch */
+        .divine-toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        
+        .divine-toggle {
+            width: 50px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .divine-toggle:before {
+            content: "";
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            background: var(--divine-gold);
+            border-radius: 50%;
+            top: 50%;
+            left: 3px;
+            transform: translateY(-50%);
+            transition: 0.3s;
+            box-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+        }
+        
+        .divine-toggle.active {
+            background: rgba(46, 204, 113, 0.2);
+            border-color: rgba(46, 204, 113, 0.5);
+        }
+        
+        .divine-toggle.active:before {
+            left: 29px;
+            background: #2ecc71;
+            box-shadow: 0 0 5px rgba(46, 204, 113, 0.5);
+        }
+        
+        /* Divine Footer */
+        .divine-footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(15, 12, 41, 0.8);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            margin-top: 20px;
+            position: relative;
+            width: 100%;
+        }
+        
+        .divine-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--divine-gold), transparent);
+        }
+        
+        .divine-footer p {
+            margin: 0;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .divine-header h1 {
+                font-size: 2rem;
+            }
+            
+            .divine-card {
+                margin: 20px;
+                width: auto;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Divine Header -->
+    <header class="divine-header">
+        <h1>GODS USAGE PANEL</h1>
+    </header>
+    
+    <!-- Divine Main Card -->
+    <div class="divine-card">
+        <div class="card-header">
+            <i class="fas fa-user-crown"></i>
+            <h3>Celestial Data Usage</h3>
+        </div>
+        
+        <div class="divine-resource">
+            <div class="resource-title">
+                <i class="fas fa-scroll"></i>
+                <span>Mortal Name</span>
+            </div>
+            <div class="resource-value">{{ email }}</div>
+        </div>
+        
+        <div class="divine-resource">
+            <div class="resource-title">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Uploaded to the Heavens</span>
+            </div>
+            <div class="resource-value">{{ up }}</div>
+            <div class="divine-progress">
+                <div class="progress-bar" id="uploaded-bar"></div>
+            </div>
+        </div>
+        
+        <div class="divine-resource">
+            <div class="resource-title">
+                <i class="fas fa-cloud-download-alt"></i>
+                <span>Downloaded from the Divine</span>
+            </div>
+            <div class="resource-value">{{ down }}</div>
+            <div class="divine-progress">
+                <div class="progress-bar" id="downloaded-bar"></div>
+            </div>
+        </div>
+        
+        <div class="divine-resource">
+            <div class="resource-title">
+                <i class="fas fa-shield-alt"></i>
+                <span>Celestial Limit</span>
+            </div>
+            <div class="resource-value">{{ total }}</div>
+            <div class="divine-progress">
+                <div class="progress-bar" id="limit-bar"></div>
+            </div>
+        </div>
+        
+        <div class="divine-resource">
+            <div class="resource-title">
+                <i class="fas fa-hourglass-end"></i>
+                <span>Prophecy Expiry</span>
+            </div>
+            <div class="resource-value">{{ expiry_date }}</div>
+        </div>
+        
+        <div class="divine-toggle-container">
+            <div class="resource-title">
+                <i class="fas fa-cog"></i>
+                <span>Divine Configuration</span>
+            </div>
+            <div class="divine-toggle" id="config-toggle"></div>
+        </div>
+    </div>
+    
+    <!-- Divine Footer -->
+    <footer class="divine-footer">
+        <p>&copy; 2025 GODS USAGE PANEL. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function parseValue(value) {
+                if (!value) return 0;
+                return parseFloat(value.replace(/[^\d.]/g, '')) || 0;
+            }
+
+            function convertToMB(value, unit) {
+                if (!unit) return value;
+                if (unit.includes("GB")) {
+                    return value * 1024;
+                } else if (unit.includes("KB")) {
+                    return value / 1024;
+                } else {
+                    return value;
+                }
+            }
+
+            // Extract units from the Flask variables
+            let uploadedUnit = "{{ up }}".replace(/[^a-zA-Z]/g, '');
+            let downloadedUnit = "{{ down }}".replace(/[^a-zA-Z]/g, '');
+            let totalLimitUnit = "{{ total }}".replace(/[^a-zA-Z]/g, '');
+
+            // Get dynamic values from Flask backend
+            let uploaded = parseValue("{{ up }}");
+            let downloaded = parseValue("{{ down }}");
+            let totalLimit = parseValue("{{ total }}");
+
+            // Convert all values to MB
+            uploaded = convertToMB(uploaded, uploadedUnit);
+            downloaded = convertToMB(downloaded, downloadedUnit);
+            totalLimit = convertToMB(totalLimit, totalLimitUnit);
+
+            // Calculate total usage (uploaded + downloaded)
+            let totalUsage = uploaded + downloaded;
+
+            function setProgressBarColor(progressBar, percentage) {
+                if (percentage <= 50) {
+                    progressBar.style.backgroundColor = "var(--celestial-blue)";
+                } else if (percentage <= 80) {
+                    progressBar.style.backgroundColor = "var(--divine-gold)";
+                } else if (percentage <= 98) {
+                    progressBar.style.backgroundColor = "var(--sacred-red)";
+                } else {
+                    progressBar.style.backgroundColor = "var(--sacred-red)";
+                    progressBar.style.animation = "holyPulse 1s infinite";
+                }
+            }
+
+            function animateProgressBar(id, value, max) {
+                let progressBar = document.getElementById(id);
+                if (!progressBar) {
+                    console.error(`Element with ID ${id} not found.`);
+                    return;
+                }
+                let percentage = (value / max) * 100;
+                progressBar.style.width = percentage + "%";
+                setProgressBarColor(progressBar, percentage);
+            }
+
+            // Animate progress bars based on usage
+            setTimeout(() => {
+                if (totalLimit > 0) {
+                    animateProgressBar("uploaded-bar", uploaded, totalLimit);
+                    animateProgressBar("downloaded-bar", downloaded, totalLimit);
+                    animateProgressBar("limit-bar", totalUsage, totalLimit);
+                }
+            }, 500);
+
+            // Get user status dynamically from backend
+            let configStatus = "{{ user_status }}".trim().toLowerCase() === "enabled";
+
+            let toggle = document.getElementById("config-toggle");
+            if (!toggle) {
+                console.error("Element with ID config-toggle not found.");
+            } else {
+                // Set initial toggle state
+                if (configStatus) {
+                    toggle.classList.add("active");
+                } else {
+                    toggle.classList.remove("active");
+                }
+
+                // Add click event listener to toggle
+                toggle.addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    let newStatus = this.classList.contains("active");
+                    console.log("New status:", newStatus);
+
+                    // Send new status to the server (original endpoint preserved)
+                    fetch("/update-status", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ status: newStatus }),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Status updated:", data);
+                    })
+                    .catch(error => {
+                        console.error("Error updating status:", error);
+                    });
+                });
+            }
+
+            // Debugging: Log values to the console
+            console.log("Uploaded: {{ up }}", uploaded);
+            console.log("Downloaded: {{ down }}", downloaded);
+            console.log("Total Limit: {{ total }}", totalLimit);
+            console.log("User Status: {{ user_status }}", configStatus);
+        });
+    </script>
+</body>
+</html>
