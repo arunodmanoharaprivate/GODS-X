@@ -1,1 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GODS USAGE PANEL - Divine Edge</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Divine Color Scheme */
+        :root {
+            --divine-gold: #FFD700;
+            --celestial-blue: #4B79CF;
+            --holy-purple: #9D50BB;
+            --sacred-red: #E53935;
+            --angelic-white: rgba(255, 255, 255, 0.92);
+            --dark-altar: #0F0C29;
+            --divine-glow: radial-gradient(circle, rgba(255,215,0,0.2) 0%, transparent 70%);
+        }
+        
+        /* Divine Animation */
+        @keyframes divineGlow {
+            0% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+            100% { opacity: 0.3; }
+        }
+        
+        @keyframes celestialFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes holyPulse {
+            0% { box-shadow: 0 0 5px var(--divine-gold); }
+            50% { box-shadow: 0 0 20px var(--divine-gold); }
+            100% { box-shadow: 0 0 5px var(--divine-gold); }
+        }
+        
+        /* Divine Base Styles */
+        body {
+            font-family: 'Cinzel', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000428, #0F0C29);
+            min-height: 100vh;
+            margin: 0;
+            color: var(--angelic-white);
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Divine Light Elements */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--divine-glow);
+            pointer-events: none;
+            animation: divineGlow 8s infinite alternate;
+            z-index: -1;
+        }
+        
+        /* Divine Header */
+        .divine-header {
+            text-align: center;
+            padding: 40px 0;
+            position: relative;
+            background: linear-gradient(to bottom, rgba(15,12,41,0.9), transparent);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .divine-header h1 {
+            font-size: 3.2rem;
+            margin: 0;
+            background: linear-gradient(to right, var(--divine-gold), var(--holy-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(157, 80, 187, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .divine-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(to right, var(--divine-gold), var(--holy-purple));
+            border-radius: 3px;
+        }
+        
+        .divine-header p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 15px auto 0;
+            opacity: 0.8;
+            letter-spacing: 1px;
+        }
+        
+        /* Divine Grid */
+        .divine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        /* Divine Cards */
+        .divine-card {
+            background: rgba(15, 12, 41, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: celestialFloat 8s infinite ease-in-out;
+        }
+        
+        .divine-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .divine-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .divine-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        .divine-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 215, 0, 0.05),
+                rgba(157, 80, 187, 0.05)
+            );
+            transform: rotate(30deg);
+            z-index: -1;
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        
+        .card-header i {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: var(--divine-gold);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
+        /* Divine Resource Items */
+        .divine-resource {
+            margin-bottom: 20px;
+        }
+        
+        .resource-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            font-weight: bold;
+        }
+        
+        .resource-title i {
+            margin-right: 10px;
+            color: var(--celestial-blue);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .resource-value {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        /* Divine Progress Bars */
+        .divine-progress {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+            position: relative;
+        }
+        
+        .divine-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to right,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.3)
+            );
+            opacity: 0.3;
+            border-radius: 4px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.6s ease, background 0.3s ease;
+            position: relative;
+        }
+        
+        /* Divine Buttons */
+        .divine-btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            background: linear-gradient(135deg, var(--divine-gold), var(--holy-purple));
+            color: #000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(157, 80, 187, 0.3);
+        }
+        
+        .divine-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(157, 80, 187, 0.4);
+            animation: holyPulse 2s infinite;
+        }
+        
+        .divine-btn i {
+            margin-right: 10px;
+        }
+        
+        .divine-btn-sm {
+            padding: 8px 16px;
+            font-size: 0.8rem;
+        }
+        
+        /* Divine Input Fields */
+        .divine-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(15, 12, 41, 0.7);
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        
+        .divine-input:focus {
+            border-color: var(--divine-gold);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+        
+        /* Divine Status Indicators */
+        .divine-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .status-online {
+            background: rgba(0, 255, 0, 0.1);
+            color: #00FF00;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+        
+        .status-warning {
+            background: rgba(255, 165, 0, 0.1);
+            color: var(--divine-gold);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        
+        .status-offline {
+            background: rgba(229, 57, 53, 0.1);
+            color: var(--sacred-red);
+            text-shadow: 0 0 5px rgba(229, 57, 53, 0.3);
+        }
+        
+        .divine-status::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+            box-shadow: 0 0 8px currentColor;
+        }
+        
+        .status-online::before {
+            background: #00FF00;
+        }
+        
+        .status-warning::before {
+            background: var(--divine-gold);
+        }
+        
+        .status-offline::before {
+            background: var(--sacred-red);
+        }
+        
+        /* Divine Ping Results */
+        .ping-result {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-left: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .ping-good {
+            background: rgba(0, 255, 0, 0.1);
+            color: #00FF00;
+            text-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+        }
+        
+        .ping-medium {
+            background: rgba(255, 165, 0, 0.1);
+            color: var(--divine-gold);
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+        
+        .ping-bad {
+            background: rgba(229, 57, 53, 0.1);
+            color: var(--sacred-red);
+            text-shadow: 0 0 5px rgba(229, 57, 53, 0.3);
+        }
+        
+        /* Divine Footer */
+        .divine-footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(15, 12, 41, 0.8);
+            border-top: 1px solid rgba(255, 215, 0, 0.1);
+            margin-top: 50px;
+            position: relative;
+        }
+        
+        .divine-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--divine-gold), transparent);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .divine-footer p {
+            margin: 0;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        
+        .divine-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--divine-gold);
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        
+        .divine-social {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--divine-gold);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .social-icon:hover {
+            background: var(--divine-gold);
+            color: #000;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+        }
+        
+        /* Divine Animations */
+        @keyframes floatText {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+        
+        .floating {
+            animation: floatText 4s infinite ease-in-out;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .divine-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .divine-header p {
+                font-size: 1rem;
+                padding: 0 20px;
+            }
+            
+            .divine-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .divine-card {
+                animation: none !important;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Divine Header -->
+    <header class="divine-header">
+        <h1 class="floating">GODS USAGE PANEL</h1>
+        <p>Divine monitoring with celestial precision</p>
+    </header>
+    
+    <!-- Divine Main Content -->
+    <main>
+        <div class="divine-grid">
+            <!-- User Management -->
+            <div class="divine-card">
+                <div class="card-header">
+                    <i class="fas fa-user-crown"></i>
+                    <h3>Divine Access</h3>
+                </div>
+                <form id="user-form" action="/usage" method="POST">
+                    <input type="text" name="user_input" class="divine-input" placeholder="Enter Mortal Name" required>
+                    <button type="submit" class="divine-btn">
+                        <i class="fas fa-eye"></i> Reveal Usage
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="divine-grid">
+            <!-- Divine Resources -->
+            <div class="divine-card">
+                <div class="card-header">
+                    <i class="fas fa-gem"></i>
+                    <h3>Celestial Resources</h3>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-brain"></i>
+                        <span>Divine CPU</span>
+                    </div>
+                    <div class="resource-value" id="cpu-usage">Channeling power...</div>
+                    <div class="divine-progress">
+                        <div class="progress-bar" id="cpu-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-memory"></i>
+                        <span>Sacred Memory</span>
+                    </div>
+                    <div class="resource-value" id="memory-usage">Consulting the gods...</div>
+                    <div class="divine-progress">
+                        <div class="progress-bar" id="memory-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-database"></i>
+                        <span>Eternal Storage</span>
+                    </div>
+                    <div class="resource-value" id="disk-usage">Measuring cosmos...</div>
+                    <div class="divine-progress">
+                        <div class="progress-bar" id="disk-progress"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Divine Server Info -->
+            <div class="divine-card">
+                <div class="card-header">
+                    <i class="fas fa-scroll"></i>
+                    <h3>Divine Scrolls</h3>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-bolt"></i>
+                        <span>Celestial Ping</span>
+                    </div>
+                    <div class="resource-value">
+                        Response: <span id="ping-result">-</span>
+                        <button id="ping-button" class="divine-btn divine-btn-sm">
+                            <i class="fas fa-bolt"></i> Test
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-globe"></i>
+                        <span>Divine Realm</span>
+                    </div>
+                    <div class="resource-value" id="server-location">Locating heavens...</div>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-heart"></i>
+                        <span>Divine Status</span>
+                    </div>
+                    <div class="resource-value">
+                        <span class="divine-status status-online" id="server-status">Blessed</span>
+                    </div>
+                </div>
+                
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Holy Protection</span>
+                    </div>
+                    <div class="resource-value">
+                        <span class="divine-status status-warning">Sanctified</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Divine Notifications -->
+        <div class="divine-grid">
+            <div class="divine-card">
+                <div class="card-header">
+                    <i class="fas fa-bell"></i>
+                    <h3>Divine Omens</h3>
+                </div>
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Celestial Warning</span>
+                    </div>
+                    <div class="resource-value">CPU reaching divine limits</div>
+                </div>
+                <div class="divine-resource">
+                    <div class="resource-title">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Prophecy Status</span>
+                    </div>
+                    <div class="resource-value">All divine systems operational</div>
+                </div>
+                <button class="divine-btn" style="width: 100%; margin-top: 15px;">
+                    <i class="fas fa-cog"></i> Configure Omens
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Divine Footer -->
+    <footer class="divine-footer">
+        <div class="footer-content">
+            <p>© 2025 GODS USAGE PANEL - Divine Edge Edition</p>
+            <span class="divine-badge">
+                <i class="fas fa-shield-alt"></i> Divine Protection Active
+            </span>
+        </div>
+        <div class="divine-social">
+            <a href="https://t.me/arunodmanoharaofficial" class="social-icon" target="_blank" aria-label="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+            <a href="#" class="social-icon" aria-label="Github">
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+    </footer>
 
+    <script>
+        // Divine Configuration (endpoints unchanged)
+        const divineConfig = {
+            endpoints: {
+                ping: '/ping',
+                serverStatus: '/server-status',
+                serverLocation: '/server-location',
+                usage: '/usage'
+            },
+            pingThresholds: {
+                good: 50,    // ms
+                medium: 150   // ms
+            }
+        };
+        
+        // Divine Elements
+        const divineElements = {
+            cpuUsage: document.getElementById('cpu-usage'),
+            cpuProgress: document.getElementById('cpu-progress'),
+            memoryUsage: document.getElementById('memory-usage'),
+            memoryProgress: document.getElementById('memory-progress'),
+            diskUsage: document.getElementById('disk-usage'),
+            diskProgress: document.getElementById('disk-progress'),
+            pingResult: document.getElementById('ping-result'),
+            pingButton: document.getElementById('ping-button'),
+            serverLocation: document.getElementById('server-location'),
+            serverStatus: document.getElementById('server-status'),
+            userForm: document.getElementById('user-form')
+        };
+        
+        // Divine Initialization
+        function divineInit() {
+            updateDivineResources();
+            setInterval(updateDivineResources, 2000);
+            
+            divineElements.pingButton.addEventListener('click', testDivinePing);
+            fetchDivineLocation();
+        }
+
+        // Divine Ping Test
+        async function testDivinePing() {
+            const originalText = divineElements.pingButton.innerHTML;
+            divineElements.pingButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Consulting Oracles...';
+            divineElements.pingButton.disabled = true;
+            
+            const startTime = Date.now();
+            try {
+                const response = await fetch(divineConfig.endpoints.ping);
+                const endTime = Date.now();
+                const pingTime = endTime - startTime;
+                
+                // Update with divine judgment
+                divineElements.pingResult.textContent = `${pingTime}ms`;
+                divineElements.pingResult.className = pingTime < divineConfig.pingThresholds.good ? 'ping-good' : 
+                                                   pingTime < divineConfig.pingThresholds.medium ? 'ping-medium' : 'ping-bad';
+            } catch (error) {
+                divineElements.pingResult.textContent = 'Divine Error';
+                divineElements.pingResult.className = 'ping-bad';
+            } finally {
+                divineElements.pingButton.innerHTML = originalText;
+                divineElements.pingButton.disabled = false;
+            }
+        }
+
+        // Update Divine Resources
+        async function updateDivineResources() {
+            try {
+                const response = await fetch(divineConfig.endpoints.serverStatus);
+                const data = await response.json();
+                
+                // Update CPU
+                divineElements.cpuUsage.textContent = `${data.cpu}% divine utilization`;
+                divineElements.cpuProgress.style.width = `${data.cpu}%`;
+                divineElements.cpuProgress.style.background = getDivineColor(data.cpu);
+                
+                // Update Memory
+                const totalMem = 16;
+                const usedMem = Math.floor((data.ram / 100) * totalMem);
+                divineElements.memoryUsage.textContent = `${usedMem}GB / ${totalMem}GB (${data.ram}%) sacred memory`;
+                divineElements.memoryProgress.style.width = `${data.ram}%`;
+                divineElements.memoryProgress.style.background = getDivineColor(data.ram);
+                
+                // Update Disk
+                const totalDisk = 200;
+                const usedDisk = Math.floor((data.disk / 100) * totalDisk);
+                divineElements.diskUsage.textContent = `${usedDisk}GB / ${totalDisk}GB (${data.disk}%) eternal storage`;
+                divineElements.diskProgress.style.width = `${data.disk}%`;
+                divineElements.diskProgress.style.background = getDivineColor(data.disk);
+                
+            } catch (error) {
+                console.error('Divine error:', error);
+                divineElements.serverStatus.className = 'divine-status status-offline';
+                divineElements.serverStatus.textContent = 'Connection Lost';
+            }
+        }
+
+        // Fetch Divine Location
+        async function fetchDivineLocation() {
+            try {
+                const response = await fetch(divineConfig.endpoints.serverLocation);
+                const data = await response.json();
+                divineElements.serverLocation.textContent = `${data.city}, ${data.country}`;
+            } catch (error) {
+                console.error('Location error:', error);
+            }
+        }
+
+        // Get Divine Color
+        function getDivineColor(percentage) {
+            if (percentage <= 50) return 'var(--celestial-blue)';
+            if (percentage <= 80) return 'var(--divine-gold)';
+            return 'var(--sacred-red)';
+        }
+
+        // Initialize Divine Panel
+        document.addEventListener('DOMContentLoaded', divineInit);
+    </script>
+</body>
+</html>
